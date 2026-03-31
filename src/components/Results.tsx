@@ -27,28 +27,6 @@ export function Results({ result, players }: ResultsProps) {
         </p>
       </div>
 
-      {/* Breakdown Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-        <div className="bg-navy-card border border-accent-yellow/30 rounded-xl p-6 text-center">
-          <p className="text-white/50 text-sm mb-1">Per Game</p>
-          <p className="font-heading text-2xl font-bold text-white">
-            {formatEuro(result.perGame)}
-          </p>
-        </div>
-        <div className="bg-navy-card border border-accent-pink/30 rounded-xl p-6 text-center">
-          <p className="text-white/50 text-sm mb-1">Per Month</p>
-          <p className="font-heading text-2xl font-bold text-white">
-            {formatEuro(result.perMonth)}
-          </p>
-        </div>
-        <div className="bg-navy-card border border-accent-coral/30 rounded-xl p-6 text-center">
-          <p className="text-white/50 text-sm mb-1">Per Player Contribution</p>
-          <p className="font-heading text-2xl font-bold text-white">
-            {formatEuro(result.perPlayer)}
-          </p>
-        </div>
-      </div>
-
       {/* Comparison Strip */}
       <div className="mt-8 bg-navy-card border border-white/10 rounded-xl p-6">
         <p className="text-white/50 text-sm text-center mb-4">

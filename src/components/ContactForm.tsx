@@ -9,11 +9,27 @@ export function ContactForm() {
     phone: "",
   });
 
-  function handleSubmit(e: FormEvent) {
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    // Stubbed — will wire to email service later
-    console.log("Form submitted:", form);
-    setSubmitted(true);
+    setError("");
+    try {
+      const res = await fetch("https://formspree.io/f/mojpwzen", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clubName: form.clubName,
+          contactName: form.contactName,
+          email: form.email,
+          phone: form.phone,
+        }),
+      });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.");
+    }
   }
 
   if (submitted) {
@@ -103,6 +119,10 @@ export function ContactForm() {
               placeholder="083 123 4567"
             />
           </div>
+
+          {error && (
+            <p className="text-red-400 text-sm text-center">{error}</p>
+          )}
 
           <button
             type="submit"
