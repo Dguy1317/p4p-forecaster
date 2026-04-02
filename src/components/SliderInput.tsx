@@ -46,8 +46,8 @@ export function SliderInput({
           {prefix && <span className="text-gold text-sm">{prefix}</span>}
           <input
             type="number"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode={step % 1 !== 0 ? "decimal" : "numeric"}
+            pattern={step % 1 !== 0 ? undefined : "[0-9]*"}
             value={editing ? draft : value}
             min={min}
             max={max}

@@ -19,7 +19,8 @@ export interface ForecastResult {
 }
 
 const SIMPLE_MODE_RATE = 5;
-const SEASON_MONTHS = 10;
+// ~8 months active season (Sep-Apr for GAA/Rugby/Soccer, excludes summer off-season)
+const SEASON_MONTHS = 8;
 
 export function calculateForecast(input: ForecastInput): ForecastResult {
   const perSponsorPerGame = input.isAdvanced

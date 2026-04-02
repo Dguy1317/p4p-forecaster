@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     clubName: "",
     contactName: "",
@@ -13,6 +14,8 @@ export function ContactForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     setError("");
     try {
       const res = await fetch("https://formspree.io/f/xdapdkba", {
@@ -29,6 +32,8 @@ export function ContactForm() {
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -126,9 +131,10 @@ export function ContactForm() {
 
           <button
             type="submit"
-            className="w-full mt-4 bg-gold hover:bg-gold-light text-navy font-heading font-bold py-3 rounded-lg transition-colors text-lg cursor-pointer"
+            disabled={submitting}
+            className="w-full mt-4 bg-gold hover:bg-gold-light text-navy font-heading font-bold py-3 rounded-lg transition-colors text-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Get Started
+            {submitting ? "Sending..." : "Get Started"}
           </button>
         </form>
       </div>
